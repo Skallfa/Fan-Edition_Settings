@@ -39,7 +39,7 @@ import com.android.internal.util.custom.cutout.CutoutUtils;
 
 import java.util.Set;
 
-public class StatusBarSettings extends SettingsPreferenceFragment
+public class StatusBar extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "StatusBar";

@@ -58,13 +58,14 @@
  import com.android.settings.custom.preference.CustomDialogPreference;
  import com.android.settings.gestures.PowerMenuPreferenceController;
  import com.android.settings.gestures.SystemNavigationPreferenceController;
+ import com.android.settings.gestures.PowerButtonTorchGesturePreferenceController;
  
  import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
  import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
  
- public class ButtonSettings extends SettingsPreferenceFragment implements
+ public class Hardware extends SettingsPreferenceFragment implements
          Preference.OnPreferenceChangeListener {
-    private static final String TAG = "Hardware";
+     private static final String TAG = "Hardware";
  
      private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
      private static final String KEY_BACK_LONG_PRESS = "hardware_keys_back_long_press";
@@ -95,6 +96,7 @@
      private ListPreference mAssistLongPressAction;
      private ListPreference mAppSwitchPressAction;
      private ListPreference mAppSwitchLongPressAction;
+     private ListPreference mEdgeLongSwipeAction;
      private SwitchPreference mCameraWakeScreen;
      private SwitchPreference mCameraSleepOnRelease;
      private SwitchPreference mCameraLaunch;
@@ -109,7 +111,6 @@
      private static final String KEY_NAV_GESTURES = "navbar_gestures";
      private static final String KEY_NAV_COMPACT_LAYOUT = "navigation_bar_compact_layout";
      private static final String KEY_TORCH_LONG_PRESS_POWER = "torch_long_press_power_gesture";
-     private static final String KEY_TORCH_LONG_PRESS_POWER_TIMEOUT = "torch_long_press_power_timeout";
      private static final String KEY_CLICK_PARTIAL_SCREENSHOT =
              "click_partial_screenshot";
      private static final String KEY_POWER_END_CALL = "power_end_call";
@@ -118,6 +119,7 @@
      private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
      private static final String KEY_VOLUME_MUSIC_CONTROLS = "volbtn_music_controls";
      private static final String KEY_GESTURE_POWER_MENU = "gesture_power_menu_summary";
+     private static final String KEY_EDGE_LONG_SWIPE = "navigation_bar_edge_long_swipe";
  
      private static final String CATEGORY_VOLUME = "volume_keys";
      private static final String CATEGORY_BACKLIGHT = "button_backlight_cat";
@@ -129,8 +131,7 @@
      private SwitchPreference mNavigationInverse;
      private Preference mNavigationGestures;
      private SwitchPreference mNavigationCompactLayout;
-     private SwitchPreference mTorchLongPressPower;
-     private ListPreference mTorchLongPressPowerTimeout;
+     private Preference mTorchLongPressPower;
      private SwitchPreference mPowerEndCall;
      private SwitchPreference mHomeAnswerCall;
      private ListPreference mVolumeKeyCursorControl;
@@ -148,7 +149,7 @@
      public void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
  
-         addPreferencesFromResource(R.xml.hardware);
+         addPreferencesFromResource(R.xml.button_settings);
  
          mOverlayManager = IOverlayManager.Stub.asInterface(
                  ServiceManager.getService(Context.OVERLAY_SERVICE));
@@ -242,6 +243,12 @@
          Action appSwitchLongPressAction = Action.fromSettings(resolver,
                  Settings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION,
                  defaultAppSwitchLongPressAction);
+         Action edgeLongSwipeAction = Action.fromSettings(resolver,
+                 Settings.System.KEY_EDGE_LONG_SWIPE_ACTION,
+                 Action.NOTHING);
+ 
+         // Edge long swipe gesture
+         mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE, edgeLongSwipeAction);
  
          // Only visible on devices that does not have a navigation bar already
          if (NavbarUtils.canDisable(getActivity())) {
@@ -252,6 +259,7 @@
              mNavigationInverse.setDependency(DISABLE_NAV_KEYS);
              mNavigationGestures.setDependency(DISABLE_NAV_KEYS);
              mNavigationCompactLayout.setDependency(DISABLE_NAV_KEYS);
+             mEdgeLongSwipeAction.setDependency(DISABLE_NAV_KEYS);
          } else {
              mNavbarCategory.removePreference(mDisableNavigationKeys);
              mDisableNavigationKeys = null;
@@ -383,8 +391,9 @@
          mSupportLongPressPowerWhenNonInteractive = getResources().getBoolean(
                  com.android.internal.R.bool.config_supportLongPressPowerWhenNonInteractive);
          mPowerEndCall = findPreference(KEY_POWER_END_CALL);
+ 
          mTorchLongPressPower = findPreference(KEY_TORCH_LONG_PRESS_POWER);
-         mTorchLongPressPowerTimeout = findPreference(KEY_TORCH_LONG_PRESS_POWER_TIMEOUT);
+ 
          mGesturePowerMenu = findPreference(KEY_GESTURE_POWER_MENU);
  
          if (hasPowerKey) {
@@ -395,7 +404,7 @@
              if (!mSupportLongPressPowerWhenNonInteractive ||
                      !ButtonSettingsUtils.deviceSupportsFlashLight(getActivity())) {
                  powerCategory.removePreference(mTorchLongPressPower);
-                 powerCategory.removePreference(mTorchLongPressPowerTimeout);
+                 mTorchLongPressPower = null;
              }
          } else {
              prefScreen.removePreference(powerCategory);
@@ -442,6 +451,9 @@
  
          // Others preferences
          updateOthersSummaries();
+ 
+         // Edge swipe gesture
+         updateEdgeSwipeGesturePreference();
      }
  
      private static boolean isKeySwapperSupported(Context context) {
@@ -464,6 +476,11 @@
              if (mNavigationCompactLayout != null){
                  mNavbarCategory.removePreference(mNavigationCompactLayout);
                  mNavigationCompactLayout = null;
+             }
+         }else{
+             if (mEdgeLongSwipeAction != null){
+                 mNavbarCategory.removePreference(mEdgeLongSwipeAction);
+                 mEdgeLongSwipeAction = null;
              }
          }
          if (!SystemNavigationPreferenceController.isGestureAvailable(getActivity())){
@@ -523,11 +540,27 @@
  
          // Others preferences
          updateOthersSummaries();
+ 
+         // Edge swipe gesture
+         updateEdgeSwipeGesturePreference();
      }
  
      private void updateOthersSummaries(){
          if (mGesturePowerMenu != null){
              mGesturePowerMenu.setSummary(PowerMenuPreferenceController.getPrefSummary(getActivity()));
+         }
+         if (mTorchLongPressPower != null){
+             mTorchLongPressPower.setSummary(PowerButtonTorchGesturePreferenceController.getPrefSummary(getActivity()));
+         }
+     }
+ 
+     private void updateEdgeSwipeGesturePreference(){
+         final ContentResolver resolver = getActivity().getContentResolver();
+         if (mEdgeLongSwipeAction != null){
+             mEdgeLongSwipeAction.setValue(Integer.toString(Action.fromSettings(resolver,
+                 Settings.System.KEY_EDGE_LONG_SWIPE_ACTION,
+                 Action.NOTHING).ordinal()));
+             mEdgeLongSwipeAction.setSummary(mEdgeLongSwipeAction.getEntry());
          }
      }
  
@@ -613,6 +646,10 @@
          }else if (preference == mVolumeKeyCursorControl) {
              handleListChange(mVolumeKeyCursorControl, newValue,
                      Settings.System.VOLUME_KEY_CURSOR_CONTROL);
+             return true;
+         } else if (preference == mEdgeLongSwipeAction) {
+             handleListChange(mEdgeLongSwipeAction, newValue,
+                     Settings.System.KEY_EDGE_LONG_SWIPE_ACTION);
              return true;
          }
          return false;
