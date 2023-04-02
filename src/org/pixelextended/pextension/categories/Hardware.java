@@ -149,7 +149,7 @@
      public void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
  
-         addPreferencesFromResource(R.xml.button_settings);
+         addPreferencesFromResource(R.xml.hardware);
  
          mOverlayManager = IOverlayManager.Stub.asInterface(
                  ServiceManager.getService(Context.OVERLAY_SERVICE));
