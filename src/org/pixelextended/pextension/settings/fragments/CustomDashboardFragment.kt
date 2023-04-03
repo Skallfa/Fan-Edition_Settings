@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.pixelextended.pextension.settings.fragment
+package org.pixelextended.pextension.settings.fragments;
 
 import androidx.preference.Preference
 
