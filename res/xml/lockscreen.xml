@@ -22,13 +22,6 @@
  <PreferenceCategory
         android:title="@string/misc_category">
 
-       <SwitchPreference
-            android:key="lockscreen_double_line_clock_switch"
-            android:title="@string/lockscreen_double_line_clock_setting_toggle"
-            android:summary="@string/lockscreen_double_line_clock_summary"
-            settings:controller="com.android.settings.display.LockscreenClockPreferenceController" />
-
-
        <com.android.settings.custom.preference.SecureSettingSwitchPreference
             android:key="lockscreen_media_metadata"
             android:title="@string/lockscreen_media_art_title"
