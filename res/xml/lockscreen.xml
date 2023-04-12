@@ -17,7 +17,9 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:key="lockscreen_settings"
+        android:title="@string/lockscreen_category">
 
  <PreferenceCategory
         android:title="@string/misc_category">

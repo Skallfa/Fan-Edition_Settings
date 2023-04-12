@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:key="button_settings"
-        android:title="@string/button_pref_title">
+        android:title="@string/hardware_category">
 
     <PreferenceCategory
         android:key="navbar_key"
