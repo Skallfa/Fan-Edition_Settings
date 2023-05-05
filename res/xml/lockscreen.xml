@@ -37,11 +37,24 @@
         settings:userRestriction="no_ambient_display"
         settings:controller="com.android.settings.gestures.DoubleTapAmbientPreferenceController" />
 
+        <!-- Double tap to sleep -->
+        <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:key="double_tap_sleep_gesture"
+            android:title="@string/status_bar_double_tap_to_sleep_title"
+            android:summary="@string/status_bar_double_tap_to_sleep_summary"
+            android:defaultValue="false" />
+
       <com.android.settings.custom.preference.SystemSettingSwitchPreference
         android:key="lockscreen_power_menu_disabled"
         android:title="@string/lockscreen_power_menu_disabled_title"
         android:summary="@string/lockscreen_power_menu_disabled_summary"
         android:defaultValue="true" />
+
+        <com.android.settings.custom.preference.GlobalSettingSwitchPreference
+            android:key="wake_when_plugged_or_unplugged"
+            android:title="@string/wake_when_plugged_or_unplugged_title"
+            android:summary="@string/wake_when_plugged_or_unplugged_summary"
+            android:defaultValue="@*android:bool/config_unplugTurnsOnScreen" />
 
     </PreferenceCategory>
 
