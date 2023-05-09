@@ -64,6 +64,10 @@
    <!-- QuickSettings haptic feedback -->
     <string name="quick_settings_vibrate_title">Vibrate on touch</string>
     <string name="quick_settings_vibrate_summary">Vibrate when touching QS tiles</string>
+      
+    <!-- Statusbar Clock background chip -->
+    <string name="statusbar_clock_chip_title">Background chip</string>
+    <string name="statusbar_clock_chip_summary">Display accented chip behind the clock</string>
 
    <!-- 4G icon -->
     <string name="show_fourg_icon_title">4G icon</string>
