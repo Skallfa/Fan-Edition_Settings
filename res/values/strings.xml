@@ -213,9 +213,9 @@
     <string name="powermenu_logout">Logout</string>
     <string name="powermenu_emergency">Emergency</string>
 
-    <!-- Fingerprint Ripple Effect -->
-    <string name="enable_fingerprint_ripple_effect_title">Ripple effect</string>
-    <string name="enable_fingerprint_ripple_effect_summary">Show ripple effect on unlock with fingerprint</string>
+    <!-- Ripple Effect on lockscreen -->
+    <string name="disable_fingerprint_ripple_effect_title">Disable Ripple effect</string>
+    <string name="disable_fingerprint_ripple_effect_summary">Disable ripple effect on unlock</string>
 
     <!-- Location Privacy Indicator -->
     <string name="location_privacy_title"> Show Location Privacy Indicator</string>
