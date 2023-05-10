@@ -80,6 +80,11 @@
             android:title="@string/disable_fingerprint_ripple_effect_title"
             android:summary="@string/disable_fingerprint_ripple_effect_summary"
             android:defaultValue="true" />
+      
+      <SwitchPreference
+            android:key="pocket_judge"
+            android:title="@string/pocket_judge_title"
+            android:summary="@string/pocket_judge_summary" />
 
     </PreferenceCategory>
 
