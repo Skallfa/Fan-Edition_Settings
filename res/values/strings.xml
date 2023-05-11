@@ -295,6 +295,10 @@
     <!-- Misc gesture settings -->
     <string name="back_gesture_haptic_title">Haptic feedback</string>
     <string name="back_gesture_haptic_summary">Enable haptic tick effect on back gesture</string>
+      
+    <!-- Lockscreen battery info indicator -->
+    <string name="lockscreen_battery_info_title">Battery info</string>
+    <string name="lockscreen_battery_info_summary">Display battery info when charging</string>
 
     <!-- Power menu on lockscreen -->
     <string name="lockscreen_power_menu_disabled_title">Disable power menu on lock screen</string>
