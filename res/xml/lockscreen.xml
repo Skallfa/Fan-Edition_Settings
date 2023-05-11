@@ -37,12 +37,7 @@
         settings:userRestriction="no_ambient_display"
         settings:controller="com.android.settings.gestures.DoubleTapAmbientPreferenceController" />
 
-        <!-- Double tap to sleep -->
-        <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="double_tap_sleep_gesture"
-            android:title="@string/status_bar_double_tap_to_sleep_title"
-            android:summary="@string/status_bar_double_tap_to_sleep_summary"
-            android:defaultValue="false" />
+        
 
       <com.android.settings.custom.preference.SystemSettingSwitchPreference
         android:key="lockscreen_power_menu_disabled"
