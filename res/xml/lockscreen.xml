@@ -74,6 +74,13 @@
             android:key="pocket_judge"
             android:title="@string/pocket_judge_title"
             android:summary="@string/pocket_judge_summary" />
+      
+      <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:key="lockscreen_battery_info"
+            android:icon="@drawable/ic_battery_charging"
+            android:title="@string/lockscreen_battery_info_title"
+            android:summary="@string/lockscreen_battery_info_summary"
+            android:defaultValue="true" />
 
     </PreferenceCategory>
 
