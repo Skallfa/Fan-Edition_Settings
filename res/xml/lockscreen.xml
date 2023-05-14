@@ -70,10 +70,7 @@
             android:summary="@string/disable_fingerprint_ripple_effect_summary"
             android:defaultValue="true" />
       
-      <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="pocket_judge"
-            android:title="@string/pocket_judge_title"
-            android:summary="@string/pocket_judge_summary" />
+     
       
       <com.android.settings.custom.preference.SystemSettingSwitchPreference
             android:key="lockscreen_battery_info"
