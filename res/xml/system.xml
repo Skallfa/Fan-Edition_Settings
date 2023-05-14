@@ -83,6 +83,12 @@
         android:title="@string/window_ignore_secure_warning"
         android:selectable="false"
         settings:searchable="false"/>
+  
+  <com.android.settings.custom.preference.GlobalSettingSwitchPreference
+            android:key="wake_when_plugged_or_unplugged"
+            android:title="@string/wake_when_plugged_or_unplugged_title"
+            android:summary="@string/wake_when_plugged_or_unplugged_summary"
+            android:defaultValue="@*android:bool/config_unplugTurnsOnScreen" />
 
 </PreferenceCategory>
 </PreferenceScreen>
