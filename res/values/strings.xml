@@ -319,6 +319,10 @@
     <string name="separate_signal_icons_summary">Show signal and WiFi separately\nRequires a SystemUI restart</string>
       
     <string name="radio_info_title">Radio info</string>
+      
+    <!-- Data disabled indicator -->
+    <string name="data_disabled_icon_title">Data disabled indicator</string>
+    <string name="data_disabled_icon_summary">Display an indicator next to signal icon when data is disabled</string>
 
     <!-- QS tiles layout -->
     <string name="qs_tile_layout_title">QS tiles layout</string>
