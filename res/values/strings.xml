@@ -310,6 +310,8 @@
     <!-- Separate signal icons -->
     <string name="separate_signal_icons_title">Separate signal icons</string>
     <string name="separate_signal_icons_summary">Show signal and WiFi separately\nRequires a SystemUI restart</string>
+      
+    <string name="radio_info_title">Radio info</string>
 
     <!-- QS tiles layout -->
     <string name="qs_tile_layout_title">QS tiles layout</string>
