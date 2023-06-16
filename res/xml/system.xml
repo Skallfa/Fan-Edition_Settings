@@ -97,6 +97,15 @@
             android:title="@string/wake_when_plugged_or_unplugged_title"
             android:summary="@string/wake_when_plugged_or_unplugged_summary"
             android:defaultValue="@*android:bool/config_unplugTurnsOnScreen" />
+  
+  <!-- Hide developer and adb status  -->
+	<Preference
+           android:key="hide_developer_status_settings"
+           android:icon="@drawable/ic_window_secure"
+           android:title="@string/hide_developer_status_title"
+           android:summary="@string/hide_developer_status_summary"
+           android:fragment="com.alpha.settings.fragments.HideDeveloperStatusSettings"
+          settings:controller="com.alpha.settings.fragments.HideDeveloperStatusPreferenceController" />
 
 </PreferenceCategory>
 </PreferenceScreen>
