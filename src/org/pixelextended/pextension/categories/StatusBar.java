@@ -32,6 +32,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.custom.preference.CustomSeekBarPreference;
 import com.android.settings.custom.preference.SystemSettingListPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -56,6 +57,9 @@ public class StatusBar extends SettingsPreferenceFragment
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
     private static final String STATUS_BAR_QUICK_QS_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
+    private static final String KEY_STATUSBAR_TOP_PADDING = "statusbar_top_padding";
+    private static final String KEY_STATUSBAR_LEFT_PADDING = "statusbar_left_padding";
+    private static final String KEY_STATUSBAR_RIGHT_PADDING = "statusbar_right_padding";            
 
     private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 2;
 
@@ -103,6 +107,18 @@ public class StatusBar extends SettingsPreferenceFragment
                 com.android.internal.R.bool.config_automatic_brightness_available)){
             mStatusBarBrightnessCategory.removePreference(mStatusBarQsShowAutoBrightness);
         }
+
+        ((CustomSeekBarPreference) findPreference(KEY_STATUSBAR_LEFT_PADDING)).setDefaultValue(
+                getResources().getDimensionPixelSize(com.android.internal.R.dimen.status_bar_padding_start),
+                true);
+
+        ((CustomSeekBarPreference) findPreference(KEY_STATUSBAR_RIGHT_PADDING)).setDefaultValue(
+                getResources().getDimensionPixelSize(com.android.internal.R.dimen.status_bar_padding_end),
+                true);
+
+        ((CustomSeekBarPreference) findPreference(KEY_STATUSBAR_TOP_PADDING)).setDefaultValue(
+                getResources().getDimensionPixelSize(com.android.internal.R.dimen.status_bar_padding_top),
+                true);    
     }
 
     @Override
