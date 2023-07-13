@@ -84,6 +84,10 @@
     <string name="unit_seconds">seconds</string>
     <string name="unit_x1000ms" translatable="false">x1000 ms</string>
 
+      <!-- QS Dual Tone Colors -->
+    <string name="qs_dual_tone_title">QS dual-tone</string>
+    <string name="qs_dual_tone_summary">Use dual tone background colors</string>
+
     <!-- Incall vibrate options -->
     <string name="incall_vibration_category">In-call vibration options</string>
     <string name="incall_vibrate_connect_title">Vibrate on connect</string>
